@@ -8,7 +8,13 @@ local M = {
       local fb_actions = require("telescope").extensions.file_browser.actions
       
       vim.keymap.set("n", "ø", ":Telescope file_browser<CR>")
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+      vim.keymap.set('n', '<C-o>', builtin.find_files, { desc = 'Telescope find files' })
+      vim.keymap.set("n", "<space>cfg", function()
+        local opts = require("telescope.themes").get_dropdown({
+          cwd = vim.fn.stdpath("config")
+        })
+        builtin.find_files(opts)
+      end)
 
       telescope.setup({
           extensions = {
